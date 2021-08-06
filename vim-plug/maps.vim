@@ -15,21 +15,26 @@ nnoremap <Leader>; $a;<Esc>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 " shorter commands
-cnoreabbrev tree NERDTreeToggle
+cnoreabbrev treg NERDTreeToggle
 cnoreabbrev blame Gblame
 cnoreabbrev find NERDTreeFind
 cnoreabbrev diff Gdiff
 
 " plugs
-map <Leader>nt :NERDTreeFind<CR>
-map <Leader>p :Files<CR>
+map <Leader>e :NERDTreeFind<CR>
+map <Leader>fs :Files<CR>
+map <Leader>rg :Rg<CR>
 map <Leader>ag :Ag<CR>
 
 " tmux navigator
-nnoremap <silent> <Leader><C-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <Leader><C-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <Leader><C-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <Leader><C-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+
+" buffer navigator
+nnoremap <silent> <TAB> : bnext<cr>
+nnoremap <silent> <S-TAB> : bprevious<cr>
 
 " Use <c-space> to trigger completion.
 "inoremap <silent><expr> <c-space> coc#refresh()
