@@ -75,8 +75,8 @@ nmap <Leader>s <Plug>(easymotion-s2)
 
 " git
 nnoremap <Leader>G :G<cr>
-nnoremap <Leader>gp :Gpush<cr>
-nnoremap <Leader>gl :Gpull<cr>
+nnoremap <Leader>gp :Git push<cr>
+nnoremap <Leader>gl :Git pull<cr>
 
 " run current file
 nnoremap <Leader>x :!node %<cr>
