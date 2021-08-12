@@ -35,6 +35,7 @@ nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 " buffer navigator
 nnoremap <silent> <TAB> : bnext<cr>
 nnoremap <silent> <S-TAB> : bprevious<cr>
+nnoremap <Leader> bd :bd!<cr>
 
 " Use <c-space> to trigger completion.
 "inoremap <silent><expr> <c-space> coc#refresh()
