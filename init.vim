@@ -16,8 +16,15 @@ so ~/.config/nvim/vim-plug/plugins.vim
 so ~/.config/nvim/vim-plug/plugin-config.vim
 so ~/.config/nvim/vim-plug/maps.vim
 
-colorscheme gruvbox
-let g:gruvbox_contrast_dark = "hard"
+" colorscheme gruvbox
+" let g:gruvbox_contrast_dark = "hard"
+set background=dark
+colorscheme oceanic_material
+let g:oceanic_material_background	= "darker"
+let g:oceanic_material_transparent_background	= 0
+let g:oceanic_material_allow_bold	= 1
+
+
 highlight Normal ctermbg=NONE
 set laststatus=2
 set noshowmode

@@ -12,6 +12,8 @@ Plug 'itchyny/lightline.vim'
 " Themes
 Plug 'morhetz/gruvbox'
 Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'projekt0n/github-nvim-theme'
+Plug 'glepnir/oceanic-material'
 
 " Tree
 Plug 'scrooloose/nerdtree'
