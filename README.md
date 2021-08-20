@@ -17,12 +17,34 @@ Open the **nvim** folder with neovim, and install the plugins with
 ```
 
 
-## Aditional steps
-- brew install tmux
-- brew install python3
-- python3 -m pip install --user --upgrade pynvim
+## FAQ
+**Error:** When I open nvim it shows me a lot of erros ...
+
+**Answer:** 
+For any error make sure you have installed **tmux, python3**
+```sh
+brew install tmux
+brew install python3
+python3 -m pip install --user --upgrade pynvim
+```
+
+**Question:** Eslint does not work on my Javascript projects
+
+**Answer:** 
+1. Check that eslint exist on your project **devDependencies**
+2. Install the next coc extensions for Javascript LSP support 
+```sh
+:CocInstall coc-json coc-tsserver
+:CocInstall coc-eslint
+:CocInstall eslint.showOutputChannel
+```
+3. **Still does not work?** Make sure you have properly configured your eslintrc file
+
 
 ### References
+- https://github.com/neoclide/coc.nvim
+- https://github.com/neoclide/coc-tsserver
+- https://github.com/neoclide/coc-eslint
 - https://github.com/glepnir/oceanic-material
 - https://github.com/nschurmann/configs
 - https://github.com/JoakoV3/nvim-linux
