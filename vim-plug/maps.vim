@@ -19,6 +19,7 @@ cnoreabbrev treg NERDTreeToggle
 cnoreabbrev blame Gblame
 cnoreabbrev find NERDTreeFind
 cnoreabbrev diff Gdiff
+cnoreabbrev eslintfix CocCommand eslint.executeAutofix
 
 " plugs
 map <Leader>e :NERDTreeFind<CR>

@@ -22,6 +22,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 
 " tmux
 Plug 'benmills/vimux'
@@ -30,6 +31,7 @@ Plug 'christoomey/vim-tmux-navigator'
 " autocomplete
 Plug 'sirver/ultisnips'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tpope/vim-endwise'
 
 " test
 Plug 'tyewang/vimux-jest-test'
