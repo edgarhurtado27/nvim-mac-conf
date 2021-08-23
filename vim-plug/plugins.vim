@@ -23,6 +23,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'elzr/vim-json'
 
 " tmux
 Plug 'benmills/vimux'

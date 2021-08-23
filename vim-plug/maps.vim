@@ -14,12 +14,20 @@ nnoremap <Leader>; $a;<Esc>
 
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
+
 " shorter commands
 cnoreabbrev treg NERDTreeToggle
 cnoreabbrev blame Gblame
 cnoreabbrev find NERDTreeFind
 cnoreabbrev diff Gdiff
 cnoreabbrev eslintfix CocCommand eslint.executeAutofix
+
+function PrettyjsonFunc()
+  :%python -m json.tool
+  :set syntax=json
+endfunction
+
+cnoreabbrev pj exec PrettyjsonFunc()
 
 " plugs
 map <Leader>e :NERDTreeFind<CR>
