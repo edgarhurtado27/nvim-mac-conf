@@ -50,7 +50,8 @@ Plug 'scrooloose/nerdcommenter'
 
 " git
 Plug 'tpope/vim-fugitive'
-
 Plug 'tpope/vim-repeat'
+Plug 'APZelos/blamer.nvim'
+
 
 call plug#end()

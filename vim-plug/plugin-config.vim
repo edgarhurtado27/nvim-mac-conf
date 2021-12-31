@@ -130,3 +130,5 @@ let $FZF_DEFAULT_OPTS='--layout=reverse'
     "return search_result
 "endfunction
 
+let g:blamer_enabled = 1
+
