@@ -16,9 +16,7 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 
 " shorter commands
-cnoreabbrev treg NERDTreeToggle
 cnoreabbrev blame Gblame
-cnoreabbrev find NERDTreeFind
 cnoreabbrev diff Gdiff
 cnoreabbrev eslintfix CocCommand eslint.executeAutofix
 
@@ -30,30 +28,19 @@ endfunction
 cnoreabbrev pj exec PrettyjsonFunc()
 
 " plugs
-map <Leader>e :NERDTreeFind<CR>
+nnoremap <Leader>e :Neotree reveal<CR>
 map <Leader>p :Files<CR>
 map <Leader>rg :Rg<CR>
 map <Leader>fs :Ag<CR>
 
 " tmux navigator
-nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 
 " buffer navigator
-nnoremap <silent> <TAB> : bnext<cr>
-nnoremap <silent> <S-TAB> : bprevious<cr>
 nnoremap <Leader> bd :bd!<cr>
-
-" Use <c-space> to trigger completion.
-"inoremap <silent><expr> <c-space> coc#refresh()
- 
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
 
 " Remap surround to lowercase s so it does not add an empty space
 xmap s <Plug>VSurround
@@ -91,46 +78,40 @@ nnoremap <Leader>gl :Git pull<cr>
 " run current file
 nnoremap <Leader>x :!node %<cr>
 
-" Use <c-space> to trigger completion.
-"if &filetype == "javascript" || &filetype == "python"
-  inoremap <c-space> <C-x><C-u>
-"else
-  "inoremap <silent><expr> <c-space> coc#refresh()
-"endif
+" Terminal
+nnoremap <C-t> :lua toggle_float_term()<CR>
+tnoremap <C-t> <C-\><C-n>:lua toggle_float_term()<CR>
 
+" Helpful mappings for IDE style
+lua << EOF
+local opts = { noremap=true, silent=true }
 
-set splitright
-function! OpenTerminal()
-  " move to right most buffer
-  execute "normal \<C-l>"
-  execute "normal \<C-l>"
-  execute "normal \<C-l>"
-  execute "normal \<C-l>"
+-- =========================
+-- LSP NAVIGATION
+-- =========================
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 
-  let bufNum = bufnr("%")
-  let bufType = getbufvar(bufNum, "&buftype", "not found")
+-- =========================
+-- INFO / DOCUMENTATION
+-- =========================
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
 
-  if bufType == "terminal"
-    " close existing terminal
-    execute "q"
-  else
-    " open terminal
-    execute "vsp term://zsh"
+-- =========================
+-- ACTIONS (IDE STYLE)
+-- =========================
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
 
-    " turn off numbers
-    execute "set nonu"
-    execute "set nornu"
+-- =========================
+-- DIAGNOSTICS
+-- =========================
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+-- Commented due to conflicts
+-- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts) 
+-- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, opts)
+EOF
 
-    " toggle insert on enter/exit
-    silent au BufLeave <buffer> stopinsert!
-    silent au BufWinEnter,WinEnter <buffer> startinsert!
-
-    " set maps inside terminal buffer
-    execute "tnoremap <buffer> <C-h> <C-\\><C-n><C-w><C-h>"
-    execute "tnoremap <buffer> <C-t> <C-\\><C-n>:q<CR>"
-    execute "tnoremap <buffer> <C-\\><C-\\> <C-\\><C-n>"
-
-    startinsert!
-  endif
-endfunction
-nnoremap <C-t> :call OpenTerminal()<CR>

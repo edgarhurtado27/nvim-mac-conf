@@ -16,7 +16,6 @@ let g:lightline = {
       \ },
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head',
-      \   'kitestatus': 'kite#statusline'
       \ },
       \ 'colorscheme': 'gruvbox',
       \ 'subseparator': {
@@ -24,15 +23,6 @@ let g:lightline = {
       \   'right': ''
       \ }
       \}
-
-"  nerdtree
-let NERDTreeShowHidden=1
-let NERDTreeQuitOnOpen=1
-let NERDTreeAutoDeleteBuffer=1
-let NERDTreeMinimalUI=1
-let NERDTreeDirArrows=1
-let NERDTreeShowLineNumbers=1
-let NERDTreeMapOpenInTab='\t'
 
 let g:javascript_plugin_flow = 1
 
@@ -42,9 +32,6 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<C-_>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
-
-" kite
-let g:kite_supported_languages = ['*']
 
 " tmux navigator
 let g:tmux_navigator_no_mappings = 1
@@ -131,4 +118,115 @@ let $FZF_DEFAULT_OPTS='--layout=reverse'
 "endfunction
 
 let g:blamer_enabled = 1
+
+lua << EOF
+require("nvim-treesitter.config").setup {
+  ensure_installed = {
+    "java",
+    "javascript",
+    "typescript",
+    "tsx",
+    "json",
+    "html",
+    "css",
+    "bash",
+    "markdown"
+  },
+
+  highlight = {
+    enable = true,
+  },
+}
+EOF
+
+lua << EOF
+require("neo-tree").setup({
+  close_if_last_window = true,
+
+  window = {
+    position = "right",
+  },
+
+  filesystem = {
+    follow_current_file = {
+      enabled = true
+    }
+  }
+})
+EOF
+
+lua << EOF
+require('gitsigns').setup()
+EOF
+
+" Open terminal 
+" lua << EOF
+" require("toggleterm").setup({
+"   direction = "float",
+"   open_mapping = nil,
+" })
+" EOF
+lua << EOF
+local Terminal = require("toggleterm.terminal").Terminal
+
+local float_term = Terminal:new({
+  direction = "float",
+  hidden = true,
+})
+
+function _G.toggle_float_term()
+  float_term:toggle()
+end
+EOF
+
+" LSP Connect Typescript with LSP
+lua << EOF
+require("mason").setup()
+require("mason-lspconfig").setup()
+EOF
+
+
+" Autocomplete
+lua << EOF
+local cmp = require'cmp'
+local luasnip = require'luasnip'
+
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+
+  mapping = cmp.mapping.preset.insert({
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+  }),
+
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'buffer' },
+  }
+})
+EOF
 
